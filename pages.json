@@ -1,0 +1,122 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app",
+				"titleNView": {
+					"titleText": "首页"
+				}
+			}
+		}
+		,{
+            "path" : "pages/login/login",
+            "style": {
+            	"navigationBarTitleText": "",
+            	"enablePullDownRefresh": false,
+            	"app-plus": {
+            		"titleNView": false
+            	}
+            }
+            
+        }
+        ,{
+            "path" : "pages/register/register",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": false
+				}
+            }
+            
+        }
+        ,{
+            "path" : "pages/sharecenter/sharecenter",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"titleText": "广场"
+					}
+				}
+            }
+            
+        }
+		,{
+		    "path" : "pages/mycenter/mycenter",
+		    "style": {
+		    	"navigationBarTitleText": "",
+		    	"enablePullDownRefresh": false,
+		    	"app-plus": {
+		    		"titleNView": {
+		    			"titleText": "我的"
+		    		}
+		    	}
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/sharelist/sharelist",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"titleText": "书单分享"
+					}
+				}
+            }
+            
+        }
+		,{
+		    "path" : "pages/sharebook/sharebook",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"titleText": "图书分享"
+					}
+				}
+		    }
+		    
+		}
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {},
+	"tabBar": {
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/home1.png",
+				"selectedIconPath": "static/home.png"
+			},
+			{
+				"pagePath": "pages/sharecenter/sharecenter",
+				"text": "广场",
+				"iconPath": "static/dongtai1.png",
+				"selectedIconPath": "static/dongtai.png"
+			},
+			{
+				"pagePath": "pages/mycenter/mycenter",
+				"text": "我的",
+				"iconPath": "static/mycenter1.png",
+				"selectedIconPath": "static/mycenter.png"
+			}
+		],
+		"borderStyle": "black",
+		"backgroundColor": "#F8F8FB",
+		"selectedColor": "#3c9cff"
+	}
+}
