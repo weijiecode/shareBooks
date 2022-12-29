@@ -22,10 +22,13 @@
 					<u-slider v-model="booktime" min="1" max="60"></u-slider>{{booktime+'(天)'}}
 				</u-form-item>
 			</u--form>
-			<u-picker itemHeight="90" @cancel="showtype=false" @confirm="typeconfirm" :show="showtype" :columns="columns"></u-picker>
-			<u-button type="primary" :plain="true" style="width: 45%;" text="分享图书"></u-button>
+			<u-picker itemHeight="90" @cancel="showtype=false" @confirm="typeconfirm" :show="showtype"
+				:columns="columns"></u-picker>
+			<u-button @click="show=true" type="primary" :plain="true" style="width: 45%;" text="分享图书"></u-button>
 		</view>
-
+		<!-- 消息提示组件 -->
+		<u-toast ref="uToast"></u-toast>
+		<u-modal title="是否分享到广场" confirmText="分享" cancelText="取消" :show="show" showCancelButton="true" @confirm="confirm" @cancel="show=false" ref="uModal" :asyncClose="true"></u-modal>
 	</view>
 </template>
 
@@ -37,6 +40,10 @@
 				fileList1: [],
 				// 书名类别选择器
 				showtype: false,
+				// 消息确认框
+				show: false,
+				// 图片
+				bookphoto: "",
 				// 书名
 				bookname: "",
 				// 感想
@@ -48,7 +55,7 @@
 				// 阅读时间
 				booktime: 10,
 				columns: [
-					['类别一', '类别二', '类别三', '类别三', '类别三', '类别三', '类别三']
+					['文艺作品', '个人传记', '图文写真书', '宣传手册', '专业著作', '专业知识普及读物', '工作稿件结集', '实用类大众图书', '影视同期书']
 				],
 			}
 		},
@@ -83,7 +90,7 @@
 			uploadFilePromise(url) {
 				return new Promise((resolve, reject) => {
 					let a = uni.uploadFile({
-						url: 'http://192.168.2.21:7001/upload', // 仅为示例，非真实的接口地址
+						url: 'http://localhost:5001/api/photouploadurl',
 						filePath: url,
 						name: 'file',
 						formData: {
@@ -93,15 +100,68 @@
 							setTimeout(() => {
 								resolve(res.data.data)
 							}, 1000)
+							console.log(res.data)
+							this.bookphoto = res.data.slice(1, res.data.length - 1)
+							console.log(this.bookphoto)
 						}
 					});
 				})
 			},
 			// 图书类别确定
 			typeconfirm(e) {
-				console.log(e)
 				this.booktype = e.value[0]
 				this.showtype = false
+			},
+			// 提交分享
+			async confirm() {
+				this.show = false
+				if (this.bookphoto == '' || this.bookthink == '' || this.booktype == '') {
+					this.$refs.uToast.show({
+						type: 'error',
+						message: "请填写完整后分享",
+						iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/error.png'
+					})
+				} else {
+					const username = uni.getStorageSync("username")
+					const res = await this.$http({
+						url: "sharebook",
+						method: "POST",
+						data: {
+							username: username,
+							bookphoto: this.bookphoto,
+							bookname: this.bookname,
+							bookthink: this.bookthink,
+							bookrate: this.bookrate,
+							booktype: this.booktype,
+							booktime: this.booktime
+						}
+					})
+					console.log(res)
+					if (res.data.code === 200) {
+						this.$refs.uToast.show({
+							type: 'success',
+							message: "分享图书成功",
+							iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/success.png'
+						})
+						this.bookphoto = ""
+						this.bookname = ""
+						this.bookrate = 3
+						this.bookthink = ""
+						this.booktime = 10
+						this.booktype = ""
+						setTimeout(() => {
+							uni.switchTab({
+								url: "/pages/sharecenter/sharecenter"
+							})
+						},1000)
+					}else {
+						this.$refs.uToast.show({
+							type: 'error',
+							message: "分享图书失败，请重试",
+							iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/error.png'
+						})
+					}
+				}
 			}
 		}
 	}
@@ -113,7 +173,6 @@
 		flex-direction: column;
 		width: 100%;
 		height: 100%;
-		background-color: #F8F8F8;
 		align-items: center;
 	}
 
@@ -134,10 +193,10 @@
 	::v-deep .u-upload__wrap__preview__image {
 		width: 240rpx !important;
 		height: 300rpx !important;
-		border-radius: 100%;
+		border-radius: 0 !important;
 		box-shadow: 0 0 0 3px #f3efef;
 	}
-	
+
 	::v-deep .u-slider {
 		width: 400rpx;
 	}
