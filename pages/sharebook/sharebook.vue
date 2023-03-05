@@ -1,15 +1,18 @@
 <template>
 	<view class="content">
+		<image class="bookimg" src="../../static/bookbg.png" mode=""></image>
 		<view class="photo">
 			<u-upload :fileList="fileList1" @afterRead="afterRead" @delete="deletePic" name="1" multiple :maxCount="1">
 			</u-upload>
 		</view>
 		<view class="bookcontent">
-			<u--input style="margin: 40rpx 0;" inputAlign="center" v-model="bookname" placeholder="输入你推荐的书名"
+			<u--input style="margin: 40rpx 100rpx;" inputAlign="center" v-model="bookname" placeholder="输入你推荐的书名"
 				border="bottom" clearable></u--input>
-			<u--textarea height="250" maxlength="500" v-model="bookthink" placeholder="输入你的感想" count></u--textarea>
+			<u--textarea height="160" style="margin: 40rpx 100rpx;" maxlength="500" v-model="bookthink"
+				placeholder="输入你的感想" count></u--textarea>
 
-			<u--form labelPosition="left">
+			<u--form style="width: 70%;display: flex;flex-direction: column;justify-content: center;margin: 0 auto;"
+				labelPosition="left">
 				<u-form-item labelWidth="160" label="图书评分" borderBottom>
 					<u-rate :value="bookrate" active-color="#ffaa00" size="50" gutter="20"></u-rate>
 				</u-form-item>
@@ -18,17 +21,19 @@
 					</u--input>
 					<u-icon slot="right" name="arrow-right"></u-icon>
 				</u-form-item>
-				<u-form-item labelWidth="160" label="阅读时间" borderBottom>
+				<u-form-item labelWidth="140" label="阅读时间" borderBottom>
 					<u-slider v-model="booktime" min="1" max="60"></u-slider>{{booktime+'(天)'}}
 				</u-form-item>
 			</u--form>
 			<u-picker itemHeight="90" @cancel="showtype=false" @confirm="typeconfirm" :show="showtype"
 				:columns="columns"></u-picker>
-			<u-button @click="show=true" type="primary" :plain="true" style="width: 45%;" text="分享图书"></u-button>
+			<u-button @click="show=true" type="primary" :plain="true"
+				style="width: 45%;position: fixed;bottom: 10px;transform: translateX(50%);" text="分享图书"></u-button>
 		</view>
 		<!-- 消息提示组件 -->
 		<u-toast ref="uToast"></u-toast>
-		<u-modal title="是否分享到广场" confirmText="分享" cancelText="取消" :show="show" showCancelButton="true" @confirm="confirm" @cancel="show=false" ref="uModal" :asyncClose="true"></u-modal>
+		<u-modal title="是否分享到广场" confirmText="分享" cancelText="取消" :show="show" :showCancelButton="true"
+			@confirm="confirm" @cancel="show=false" ref="uModal" :asyncClose="true"></u-modal>
 	</view>
 </template>
 
@@ -153,8 +158,8 @@
 							uni.switchTab({
 								url: "/pages/sharecenter/sharecenter"
 							})
-						},1000)
-					}else {
+						}, 1000)
+					} else {
 						this.$refs.uToast.show({
 							type: 'error',
 							message: "分享图书失败，请重试",
@@ -174,6 +179,9 @@
 		width: 100%;
 		height: 100%;
 		align-items: center;
+		// background: url(../../static/bookbg.png);
+		// background-repeat: no-repeat;
+		// background-position: center;
 	}
 
 	.photo {
@@ -181,24 +189,24 @@
 	}
 
 	::v-deep .u-upload__button {
-		width: 240rpx !important;
-		height: 300rpx !important;
+		width: 160rpx !important;
+		height: 180rpx !important;
 	}
 
 	::v-deep .u-upload__status {
-		width: 240rpx !important;
-		height: 300rpx !important;
+		width: 160rpx !important;
+		height: 180rpx !important;
 	}
 
 	::v-deep .u-upload__wrap__preview__image {
-		width: 240rpx !important;
-		height: 300rpx !important;
+		width: 160rpx !important;
+		height: 180rpx !important;
 		border-radius: 0 !important;
 		box-shadow: 0 0 0 3px #f3efef;
 	}
 
 	::v-deep .u-slider {
-		width: 400rpx;
+		width: 340rpx;
 	}
 
 	::v-deep .u-textarea--radius[data-v-09988a29] {
@@ -210,10 +218,30 @@
 		flex-direction: column;
 		align-items: center;
 		margin-bottom: 20rpx;
+		z-index: 99;
 	}
 
 	.bookcontent {
 		width: 700rpx;
 		// height: 400rpx;
+	}
+
+	.bookimg {
+		position: fixed;
+		width: 90%;
+		height: 80%;
+		z-index: -1;
+	}
+
+	::v-deep .u-input--square {
+		background-color: unset !important;
+	}
+
+	::v-deep .u-textarea {
+		background-color: unset !important;
+	}
+
+	::v-deep .u-textarea__count {
+		background-color: unset !important;
 	}
 </style>

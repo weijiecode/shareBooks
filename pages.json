@@ -87,6 +87,20 @@
 		    }
 		    
 		}
+		,{
+		    "path" : "pages/sharedetail/sharedetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"titleText": "分享详情"
+					}
+				}
+		    }
+		    
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
