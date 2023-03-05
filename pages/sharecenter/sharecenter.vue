@@ -1,9 +1,9 @@
 <template>
 	<view class="content">
-		<u-subsection mode="button" :list="['推荐','图书','书单']" :current="current" @change="sectionChange">
+		<u-subsection fontSize="24" mode="button" :list="['推荐','图书','书单']" :current="current" @change="sectionChange">
 		</u-subsection>
 		<view class="hot" v-if="current==0">
-			<view @click="todetail(bookData[0].id)" class="imgboxtop" style="background-color: rgb(255 124 0 / 30%);">
+			<view @click="todetail(bookData[0])" class="imgboxtop" style="background-color: rgb(255 124 0 / 30%);">
 				<view class="boxcontent">
 					<view class="one">
 						<image class="bookimg" :src="bookData[0].bookphoto" mode=""></image>
@@ -22,14 +22,14 @@
 					<view class="three">
 						<u-icon name="share-fill" color="#3a3a3a" size="28"></u-icon>
 						<view class="username">
-							来自用户 {{bookData[0].username}} 的分享
+							来自用户 {{bookData[0].nickname}} 的分享
 						</view>
 					</view>
 				</view>
 			</view>
 			<view class="row">
 				<view class="leftbox">
-					<view @click="todetail(bookData[1].id)" class="imgboxl"
+					<view @click="todetail(bookData[1])" class="imgboxl"
 						style="background-color: rgb(237 237 208 / 30%);">
 						<view class="boxcontent">
 							<view class="one">
@@ -49,12 +49,12 @@
 							<view class="three">
 								<u-icon name="share-fill" color="#3a3a3a" size="28"></u-icon>
 								<view class="username">
-									来自用户 {{bookData[0].username}} 的分享
+									来自用户 {{bookData[0].nickname}} 的分享
 								</view>
 							</view>
 						</view>
 					</view>
-					<view @click="todetail(bookData[2].id)" class="imgboxr"
+					<view @click="todetail(bookData[2])" class="imgboxr"
 						style="background-color: rgb(76 76 70 / 30%);">
 						<view class="boxcontent">
 							<view class="one">
@@ -74,12 +74,12 @@
 							<view class="three">
 								<u-icon name="share-fill" color="#3a3a3a" size="28"></u-icon>
 								<view class="username">
-									来自用户 {{bookData[2].username}} 的分享
+									来自用户 {{bookData[2].nickname}} 的分享
 								</view>
 							</view>
 						</view>
 					</view>
-					<view @click="todetail(bookData[8].id)" class="imgboxl" style="background-color: rgb(163 221 97);">
+					<view @click="todetail(bookData[8])" class="imgboxl" style="background-color: rgb(163 221 97);">
 						<view class="boxcontent">
 							<view class="one">
 								<image class="bookimg" :src="bookData[8].bookphoto" mode=""></image>
@@ -98,14 +98,14 @@
 							<view class="three">
 								<u-icon name="share-fill" color="#3a3a3a" size="28"></u-icon>
 								<view class="username">
-									来自用户 {{bookData[8].username}} 的分享
+									来自用户 {{bookData[8].nickname}} 的分享
 								</view>
 							</view>
 						</view>
 					</view>
 				</view>
 				<view class="rightbox">
-					<view @click="todetail(bookData[3].id)" class="imgboxr"
+					<view @click="todetail(bookData[3])" class="imgboxr"
 						style="background-color: rgb(249 38 52 / 30%);">
 						<view class="boxcontent">
 							<view class="one">
@@ -125,12 +125,12 @@
 							<view class="three">
 								<u-icon name="share-fill" color="#3a3a3a" size="28"></u-icon>
 								<view class="username">
-									来自用户 {{bookData[0].username}} 的分享
+									来自用户 {{bookData[0].nickname}} 的分享
 								</view>
 							</view>
 						</view>
 					</view>
-					<view @click="todetail(bookData[7].id)" class="imgboxl" style="background-color: rgb(152 198 235);">
+					<view @click="todetail(bookData[7])" class="imgboxl" style="background-color: rgb(152 198 235);">
 						<view class="boxcontent">
 							<view class="one">
 								<image class="bookimg" :src="bookData[7].bookphoto" mode=""></image>
@@ -149,12 +149,12 @@
 							<view class="three">
 								<u-icon name="share-fill" color="#3a3a3a" size="28"></u-icon>
 								<view class="username">
-									来自用户 {{bookData[4].username}} 的分享
+									来自用户 {{bookData[4].nickname}} 的分享
 								</view>
 							</view>
 						</view>
 					</view>
-					<view @click="todetail(bookData[9].id)" class="imgboxr" style="background-color: rgb(218 207 237);">
+					<view @click="todetail(bookData[9])" class="imgboxr" style="background-color: rgb(218 207 237);">
 						<view class="boxcontent">
 							<view class="one">
 								<image class="bookimg" :src="bookData[9].bookphoto" mode=""></image>
@@ -173,7 +173,7 @@
 							<view class="three">
 								<u-icon name="share-fill" color="#3a3a3a" size="28"></u-icon>
 								<view class="username">
-									来自用户 {{bookData[9].username}} 的分享
+									来自用户 {{bookData[9].nickname}} 的分享
 								</view>
 							</view>
 						</view>
@@ -184,11 +184,11 @@
 				到底啦~
 			</view>
 			<view class="zhanwei">
-				
+
 			</view>
 		</view>
 		<view class="book" v-if="current==1">
-			<view @click="todetail(item.id)" class="onebox" v-for="item in bookData" :key="item.id">
+			<view @click="todetail(item)" class="onebox" v-for="item in bookData" :key="item.id">
 				<view class="leftimg">
 					<image class="subbookimg" :src="item.bookphoto" mode=""></image>
 				</view>
@@ -202,7 +202,7 @@
 					<view class="subthree">
 						<u-icon name="share-fill" color="#3a3a3a" size="28"></u-icon>
 						<view class="username">
-							用户 {{item.username}} 的分享
+							用户 {{item.nickname}} 的分享
 						</view>
 					</view>
 				</view>
@@ -215,7 +215,7 @@
 			</view>
 		</view>
 		<view class="list" v-if="current==2">
-			<view @click="todetaillist(item.id)" class="subonebox" v-for="item in booklist" :key="item.id">
+			<view @click="todetaillist(item)" class="subonebox" v-for="item in booklist" :key="item.id">
 				<view class="righttext">
 					<view class="rname">
 						{{item.title}}
@@ -226,7 +226,7 @@
 					<view class="subthree1">
 						<u-icon name="share-fill" color="#3a3a3a" size="28"></u-icon>
 						<view class="username">
-							用户{{item.username}}的分享
+							用户 {{item.nickname}} 的分享
 						</view>
 					</view>
 				</view>
@@ -260,63 +260,63 @@
 					bookthink: "",
 					createtime: "",
 					username: ""
-				},{
+				}, {
 					bookphoto: "",
 					bookname: "",
 					bookrate: "",
 					bookthink: "",
 					createtime: "",
 					username: ""
-				},{
+				}, {
 					bookphoto: "",
 					bookname: "",
 					bookrate: "",
 					bookthink: "",
 					createtime: "",
 					username: ""
-				},{
+				}, {
 					bookphoto: "",
 					bookname: "",
 					bookrate: "",
 					bookthink: "",
 					createtime: "",
 					username: ""
-				},{
+				}, {
 					bookphoto: "",
 					bookname: "",
 					bookrate: "",
 					bookthink: "",
 					createtime: "",
 					username: ""
-				},{
+				}, {
 					bookphoto: "",
 					bookname: "",
 					bookrate: "",
 					bookthink: "",
 					createtime: "",
 					username: ""
-				},{
+				}, {
 					bookphoto: "",
 					bookname: "",
 					bookrate: "",
 					bookthink: "",
 					createtime: "",
 					username: ""
-				},{
+				}, {
 					bookphoto: "",
 					bookname: "",
 					bookrate: "",
 					bookthink: "",
 					createtime: "",
 					username: ""
-				},{
+				}, {
 					bookphoto: "",
 					bookname: "",
 					bookrate: "",
 					bookthink: "",
 					createtime: "",
 					username: ""
-				},{
+				}, {
 					bookphoto: "",
 					bookname: "",
 					bookrate: "",
@@ -363,18 +363,18 @@
 				console.log(this.booklist)
 			},
 			// 点击具体图书
-			todetail(id) {
-				console.log(id)
+			todetail(item) {
+				console.log(item)
 				uni.navigateTo({
-					url: "/pages/sharedetail/sharedetail?id="+id+"&type=1"
+					url: "/pages/sharedetail/sharedetail?id=" + item.id + "&type=1&nickname=" + item.nickname
 				})
-				
+
 			},
 			// 点击具体书单
-			todetaillist(id) {
-				console.log(id)
+			todetaillist(item) {
+				console.log(item)
 				uni.navigateTo({
-					url: "/pages/sharedetail/sharedetail?id="+id+"&type=2"
+					url: "/pages/sharedetail/sharedetail?id=" + item.id + "&type=2&nickname=" + item.nickname
 				})
 			}
 		}
@@ -489,7 +489,7 @@
 		padding: 16rpx;
 		border-bottom: 1px solid #c9c9c9;
 	}
-	
+
 	.subonebox {
 		padding: 0 24rpx;
 		border-bottom: 1px solid #c9c9c9;
@@ -515,10 +515,9 @@
 		display: flex;
 		justify-content: end;
 		color: #3a3a3a;
-		margin-top: 25rpx;
-		padding-bottom: 15rpx;
+		margin-top: 40rpx;
 	}
-	
+
 	.subthree1 {
 		font-size: 12px;
 		display: flex;

@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<view class="topimg">
+		<view class="topimg" v-if="type==1">
 			<image class="bookimg" :src="book.bookphoto" mode=""></image>
 			<view class="subcontent">
 				<image class="subphoto" :src="book.bookphoto" mode=""></image>
@@ -14,7 +14,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="bookbox">
+		<view class="bookbox" v-if="type==1">
 			<view class="bookcontent">
 				{{book.bookthink}}
 			</view>
@@ -23,10 +23,32 @@
 					<span>类型：</span>{{book.booktype}}
 				</view>
 				<view class="subrow">
-					<span>评分：</span><u-rate :value="book.bookrate" active-color="#ffaa00" size="50" gutter="20"></u-rate>
+					<span>评分：</span>
+					<u-rate :value="book.bookrate" active-color="#ffaa00" size="50" gutter="20"></u-rate>
 				</view>
 				<view class="subrow">
 					<span>阅读时间：</span>{{book.booktime}}天
+				</view>
+			</view>
+		</view>
+		<view class="content" v-if="type==2">
+			<view class="toptitle">
+				<u-icon name="bookmark-fill" style="margin-right: 20rpx;" color="#2979ff" size="40"></u-icon>
+				<view>
+					{{list.title}}
+				</view>
+				<view class="subtime">
+					<!-- {{list.createtime}} -->
+					<u-icon name="share-fill" color="#3a3a3a" size="28"></u-icon>
+					<view class="username">
+						用户 {{nickname}} 的分享
+					</view>
+				</view>
+			</view>
+			<view class="listbox">
+				<view class="listitem" v-for="item in list.booklist" :key="item.id">
+					<view class="left" :style="item.csty"></view>
+					<view class="right">{{item.value}}</view>
 				</view>
 			</view>
 		</view>
@@ -39,6 +61,7 @@
 			console.log(option)
 			this.id = option.id
 			this.type = option.type
+			this.nickname = option.nickname
 		},
 		mounted() {
 			if (this.type == 1) {
@@ -55,7 +78,8 @@
 				// 图书数据
 				book: "",
 				// 书单数据
-				list: ""
+				list: "",
+				nickname: ""
 			}
 		},
 		methods: {
@@ -86,6 +110,8 @@
 				if (res.data.code === 200) {
 					this.list = res.data.data[0]
 				}
+				this.list.booklist = JSON.parse(this.list.booklist)
+				console.log(this.list)
 			}
 		}
 	}
@@ -135,7 +161,7 @@
 		margin-bottom: 160rpx;
 		color: #fff;
 	}
-	
+
 	.bookcontent {
 		background-color: #ffffff;
 		padding: 36rpx;
@@ -144,14 +170,64 @@
 		margin: 18rpx auto;
 		display: flex;
 		flex-direction: column;
+
 		span {
-			color: 	#838383;
+			color: #838383;
 		}
 	}
-	
+
+	.listbox {
+		padding: 20rpx 60RPX;
+		border-radius: 10px;
+		width: 560rpx;
+		height: auto;
+		margin: 0 auto;
+		background-color: #ffffff;
+	}
+
 	.subrow {
 		margin: 16rpx 0;
 		display: flex;
 		align-items: center;
+	}
+
+	.listitem {
+		display: flex;
+		align-items: center;
+		margin-top: 28rpx;
+	}
+
+	.toptitle {
+		display: flex;
+		font-weight: bold;
+		align-items: center;
+		justify-content: center;
+		font-size: 18px;
+		padding: 45rpx 60RPX;
+		border-radius: 10px;
+		width: 560rpx;
+		height: auto;
+		margin: 0 auto;
+		background-color: #ffffff;
+		margin-bottom: 20rpx;
+		position: relative;
+		.subtime {
+			display: flex;
+			align-items: center;
+			margin-top: 16rpx;
+			position: absolute;
+			right: 15rpx;
+			bottom: 15rpx;
+			color: #838383;
+			font-size: 13px;
+		}
+	}
+
+	.left {
+		width: 8px;
+		height: 8px;
+		background-color: #fff;
+		border-radius: 50%;
+		margin-right: 15px;
 	}
 </style>

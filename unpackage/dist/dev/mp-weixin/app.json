@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/sharecenter/sharecenter",
+    "pages/mycenter/mycenter",
+    "pages/sharelist/sharelist",
+    "pages/sharebook/sharebook",
+    "pages/sharedetail/sharedetail"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/home1.png",
+        "selectedIconPath": "static/home.png"
+      },
+      {
+        "pagePath": "pages/sharecenter/sharecenter",
+        "text": "广场",
+        "iconPath": "static/dongtai1.png",
+        "selectedIconPath": "static/dongtai.png"
+      },
+      {
+        "pagePath": "pages/mycenter/mycenter",
+        "text": "我的",
+        "iconPath": "static/mycenter1.png",
+        "selectedIconPath": "static/mycenter.png"
+      }
+    ],
+    "borderStyle": "black",
+    "backgroundColor": "#F8F8FB",
+    "selectedColor": "#3c9cff"
+  },
+  "usingComponents": {}
+}

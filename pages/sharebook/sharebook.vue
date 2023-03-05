@@ -222,14 +222,14 @@
 	}
 
 	.bookcontent {
-		width: 700rpx;
+		width: 560rpx;
 		// height: 400rpx;
 	}
 
 	.bookimg {
 		position: fixed;
-		width: 90%;
-		height: 80%;
+		width: 100%;
+		height: 100%;
 		z-index: -1;
 	}
 
